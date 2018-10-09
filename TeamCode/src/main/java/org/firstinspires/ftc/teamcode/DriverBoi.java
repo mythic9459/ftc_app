@@ -60,6 +60,8 @@ public class DriverBoi extends LinearOpMode {
     private DcMotor BR = null;
     private DcMotor FL = null;
     private DcMotor BL = null;
+    private DcMotor MR = null;
+    private DcMotor ML = null;
 
 
     @Override
@@ -74,6 +76,8 @@ public class DriverBoi extends LinearOpMode {
         BR = hardwareMap.get(DcMotor.class, "BR");
         FL = hardwareMap.get(DcMotor.class, "FL");
         BL = hardwareMap.get(DcMotor.class, "BL");
+        MR = hardwareMap.get(DcMotor.class, "FL");
+        ML = hardwareMap.get(DcMotor.class, "BL");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -83,6 +87,8 @@ public class DriverBoi extends LinearOpMode {
         BR.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.FORWARD);
+        MR.setDirection(DcMotor.Direction.REVERSE);
+        ML.setDirection(DcMotor.Direction.FORWARD);
 
 
         double Lpower;
@@ -117,6 +123,8 @@ public class DriverBoi extends LinearOpMode {
             FL.setPower(Lpower);
             FR.setPower(Rpower);
             FL.setPower(Lpower);
+            MR.setPower(Rpower);
+            ML.setPower(Lpower);
 
 
             // Show the elapsed game time and wheel power.
