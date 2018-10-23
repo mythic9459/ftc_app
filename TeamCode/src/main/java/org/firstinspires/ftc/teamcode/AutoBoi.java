@@ -40,8 +40,8 @@ public class AutoBoi extends LinearOpMode {
         double Lpower;
         double Rpower;
 
-        Lpower = 1;
-        Rpower = 1;
+        Lpower = .50;
+        Rpower = .50;
 
         FR.setPower(Rpower);
         BR.setPower(Rpower);
