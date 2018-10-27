@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 
 
 
-@TeleOp(name="Driver Boi", group="Linear Opmode")
+@TeleOp(name="Driver BoiXD", group="Linear Opmode")
 
 public class DriverBoi extends LinearOpMode {
 
