@@ -63,10 +63,10 @@ public class DriverBoi extends LinearOpMode {
 
 
             FR.setPower(Rpower);
-            BR.setPower(Rpower);
+            BR.setPower(Rpower *2);
             MR.setPower(Rpower);
             FL.setPower(Lpower);
-            BL.setPower(Lpower);
+            BL.setPower(Lpower *2);
             ML.setPower(Lpower);
 
 

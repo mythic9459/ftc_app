@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -49,10 +50,7 @@ public class AutoBoi extends LinearOpMode {
         FL.setPower(Lpower);
         BL.setPower(Lpower);
         ML.setPower(Lpower);
-
-
-
-
-        }
     }
 
+
+}
