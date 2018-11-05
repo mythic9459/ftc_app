@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -10,8 +11,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="Driver BoiXD", group="Linear Opmode")
 
-public class DriverBoi extends LinearOpMode {
-
+public class DriverBoi extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FR = null;
@@ -41,8 +41,8 @@ public class DriverBoi extends LinearOpMode {
 
         FR.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.REVERSE);
-        MR.setDirection(DcMotor.Direction.FORWARD);
-        FL.setDirection(DcMotor.Direction.REVERSE);
+        MR.setDirection(DcMotor.Direction.REVERSE);
+        FL.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.FORWARD);
         ML.setDirection(DcMotor.Direction.FORWARD);
 
