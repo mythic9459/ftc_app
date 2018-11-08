@@ -20,6 +20,7 @@ public class DriverBoi extends LinearOpMode{
     private DcMotor BL = null;
     private DcMotor MR = null;
     private DcMotor ML = null;
+    private DcMotor Intake = null;
 
 
     @Override
@@ -34,6 +35,7 @@ public class DriverBoi extends LinearOpMode{
         FL = hardwareMap.get(DcMotor.class, "FL");
         BL = hardwareMap.get(DcMotor.class, "BL");
         ML = hardwareMap.get(DcMotor.class, "ML");
+        Intake = hardwareMap.get(DcMotor.class, "Intake");
 
 
 
@@ -45,11 +47,13 @@ public class DriverBoi extends LinearOpMode{
         FL.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.FORWARD);
         ML.setDirection(DcMotor.Direction.FORWARD);
+        Intake.setDirection(DcMotor.Direction.FORWARD);
 
 
 
         double Lpower;
         double Rpower;
+        double Ipower;
 
         waitForStart();
         runtime.reset();
@@ -60,6 +64,7 @@ public class DriverBoi extends LinearOpMode{
 
              Lpower  = -gamepad1.left_stick_y *0.5 ;
              Rpower = -gamepad1.right_stick_y *0.5 ;
+             Ipower = -gamepad1.left_trigger-gamepad1.right_trigger;
 
 
             FR.setPower(Rpower);
@@ -68,6 +73,8 @@ public class DriverBoi extends LinearOpMode{
             FL.setPower(Lpower);
             BL.setPower(Lpower *2);
             ML.setPower(Lpower);
+
+            Intake.setPower(Ipower);
 
 
 
