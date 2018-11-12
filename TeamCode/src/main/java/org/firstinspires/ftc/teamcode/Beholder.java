@@ -46,8 +46,7 @@ public class Beholder
     static final double     WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * Math.PI;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_ORBITAL / WHEEL_CIRCUMFERENCE_INCHES);
 
-    double Rpower;
-    double Lpower;
+
        // this is the CONSTRUCTOR for this class
     // from your OpMode, you'll have to pass a reference to the OpMode as the parameter
     // Will look like this:

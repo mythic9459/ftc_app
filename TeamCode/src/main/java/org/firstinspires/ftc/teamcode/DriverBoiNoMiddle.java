@@ -8,18 +8,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
+@TeleOp(name="Driver Boi No Middle", group="Linear Opmode")
 
-@TeleOp(name="Driver Boi", group="Linear Opmode")
-
-public class DriverBoi extends LinearOpMode{
+public class DriverBoiNoMiddle extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FR = null;
     private DcMotor BR = null;
     private DcMotor FL = null;
     private DcMotor BL = null;
-    private DcMotor MR = null;
-    private DcMotor ML = null;
+    //private DcMotor MR = null;
+    //private DcMotor ML = null;
     private DcMotor Intake = null;
 
 
@@ -31,10 +30,10 @@ public class DriverBoi extends LinearOpMode{
 
         FR = hardwareMap.get(DcMotor.class, "FR");
         BR = hardwareMap.get(DcMotor.class, "BR");
-        MR = hardwareMap.get(DcMotor.class, "MR");
+        //MR = hardwareMap.get(DcMotor.class, "MR");
         FL = hardwareMap.get(DcMotor.class, "FL");
         BL = hardwareMap.get(DcMotor.class, "BL");
-        ML = hardwareMap.get(DcMotor.class, "ML");
+        //ML = hardwareMap.get(DcMotor.class, "ML");
         Intake = hardwareMap.get(DcMotor.class, "Intake");
 
 
@@ -43,10 +42,10 @@ public class DriverBoi extends LinearOpMode{
 
         FR.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.REVERSE);
-        MR.setDirection(DcMotor.Direction.REVERSE);
+        //MR.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.FORWARD);
-        ML.setDirection(DcMotor.Direction.FORWARD);
+        //ML.setDirection(DcMotor.Direction.FORWARD);
         Intake.setDirection(DcMotor.Direction.FORWARD);
 
 
@@ -62,16 +61,16 @@ public class DriverBoi extends LinearOpMode{
         while (opModeIsActive()) {
 
 
-             Lpower  = -gamepad1.left_stick_y *0.5 ;
+             Lpower = -gamepad1.left_stick_y *0.5 ;
              Rpower = -gamepad1.right_stick_y *0.5 ;
              Ipower = gamepad1.left_trigger - gamepad1.right_trigger;
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
-            MR.setPower(Rpower);
+            //MR.setPower(Rpower);
             FL.setPower(Lpower);
             BL.setPower(Lpower);
-            ML.setPower(Lpower);
+            //ML.setPower(Lpower);
 
             Intake.setPower(Ipower);
 
