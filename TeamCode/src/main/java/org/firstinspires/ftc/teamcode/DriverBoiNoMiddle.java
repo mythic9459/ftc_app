@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-
 @TeleOp(name="Driver Boi No Middle", group="Linear Opmode")
 
 public class DriverBoiNoMiddle extends LinearOpMode{
@@ -20,7 +19,7 @@ public class DriverBoiNoMiddle extends LinearOpMode{
     //private DcMotor MR = null;
     //private DcMotor ML = null;
     private DcMotor Intake = null;
-
+    private DcMotor IntakeHinge = null;
 
     @Override
     public void runOpMode() {
@@ -35,7 +34,7 @@ public class DriverBoiNoMiddle extends LinearOpMode{
         BL = hardwareMap.get(DcMotor.class, "BL");
         //ML = hardwareMap.get(DcMotor.class, "ML");
         Intake = hardwareMap.get(DcMotor.class, "Intake");
-
+        IntakeHinge = hardwareMap.get(DcMotor.class, "IH");
 
 
 
@@ -47,13 +46,12 @@ public class DriverBoiNoMiddle extends LinearOpMode{
         BL.setDirection(DcMotor.Direction.FORWARD);
         //ML.setDirection(DcMotor.Direction.FORWARD);
         Intake.setDirection(DcMotor.Direction.FORWARD);
+        IntakeHinge.setDirection(DcMotor.Direction.FORWARD);
 
-
-
+        double IHpower;
         double Lpower;
         double Rpower;
         double Ipower;
-
         waitForStart();
         runtime.reset();
 
@@ -63,7 +61,8 @@ public class DriverBoiNoMiddle extends LinearOpMode{
 
              Lpower = -gamepad1.left_stick_y *0.5 ;
              Rpower = -gamepad1.right_stick_y *0.5 ;
-             Ipower = gamepad1.left_trigger - gamepad1.right_trigger;
+             Ipower = -gamepad2.right_stick_y;
+             IHpower = -gamepad2.left_stick_y;
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
@@ -73,12 +72,12 @@ public class DriverBoiNoMiddle extends LinearOpMode{
             //ML.setPower(Lpower);
 
             Intake.setPower(Ipower);
-
+            IntakeHinge.setPower(IHpower);
 
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", Lpower, Rpower);
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", Lpower, Rpower, Ipower);
             telemetry.update();
         }
     }
