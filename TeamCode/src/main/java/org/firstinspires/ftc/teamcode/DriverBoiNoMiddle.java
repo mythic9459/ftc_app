@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -16,10 +17,10 @@ public class DriverBoiNoMiddle extends LinearOpMode{
     private DcMotor BR = null;
     private DcMotor FL = null;
     private DcMotor BL = null;
-    //private DcMotor MR = null;
-    //private DcMotor ML = null;
+    private DcMotor MR = null;
+    private DcMotor ML = null;
     private DcMotor Intake = null;
-    private DcMotor IntakeHinge = null;
+    private CRServo IH = null;
 
     @Override
     public void runOpMode() {
@@ -29,24 +30,24 @@ public class DriverBoiNoMiddle extends LinearOpMode{
 
         FR = hardwareMap.get(DcMotor.class, "FR");
         BR = hardwareMap.get(DcMotor.class, "BR");
-        //MR = hardwareMap.get(DcMotor.class, "MR");
+        MR = hardwareMap.get(DcMotor.class, "MR");
         FL = hardwareMap.get(DcMotor.class, "FL");
         BL = hardwareMap.get(DcMotor.class, "BL");
-        //ML = hardwareMap.get(DcMotor.class, "ML");
+        ML = hardwareMap.get(DcMotor.class, "ML");
         Intake = hardwareMap.get(DcMotor.class, "Intake");
-        IntakeHinge = hardwareMap.get(DcMotor.class, "IH");
+        IH = hardwareMap.get(CRServo.class, "IH");
 
 
 
 
         FR.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.REVERSE);
-        //MR.setDirection(DcMotor.Direction.REVERSE);
+        MR.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.FORWARD);
         BL.setDirection(DcMotor.Direction.FORWARD);
-        //ML.setDirection(DcMotor.Direction.FORWARD);
+        ML.setDirection(DcMotor.Direction.FORWARD);
         Intake.setDirection(DcMotor.Direction.FORWARD);
-        IntakeHinge.setDirection(DcMotor.Direction.FORWARD);
+        //IntakeHinge.setDirection(DcMotor.Direction.FORWARD);
 
         double IHpower;
         double Lpower;
@@ -66,13 +67,13 @@ public class DriverBoiNoMiddle extends LinearOpMode{
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
-            //MR.setPower(Rpower);
+            MR.setPower(Rpower);
             FL.setPower(Lpower);
             BL.setPower(Lpower);
-            //ML.setPower(Lpower);
+            ML.setPower(Lpower);
 
             Intake.setPower(Ipower);
-            IntakeHinge.setPower(IHpower);
+            IH.setPower(IHpower);
 
 
 
