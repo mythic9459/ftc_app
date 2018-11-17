@@ -9,8 +9,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 /**
  * This is an OpMode that uses a hardware robot class
  */
-@Autonomous(name = "Jellybean", group = "IMU1")
-public class Jellybean extends LinearOpMode {
+@Autonomous(name = "Crater Auto", group = "IMU1")
+public class Crater_Auto extends LinearOpMode {
 
     // this is the motor power so when you make changes you can just make here
     // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
@@ -40,27 +40,19 @@ public class Jellybean extends LinearOpMode {
         // -------------------------------------------------------------------------------
 
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 24);
+        robot.Drive(DRIVE_SPEED, 60);
         sleep(1000);
+
+
 
         // turn LEFT 90 degrees
-        robot.Turn(90, DRIVE_SPEED);
-        sleep(1000);
+        /*robot.Turn(90, DRIVE_SPEED);
+        sleep(1000);*/
+        // turn RIGHT 90 degrees
+        /*robot.Turn(-90, DRIVE_SPEED);
+        sleep(1000);*/
 
-        // drive forward about 12 inches
-        robot.Drive(DRIVE_SPEED, 12);
-        sleep(1000);
 
-        // turn LEFT 90 degrees
-        robot.Turn(90, DRIVE_SPEED);
-        sleep(1000);
-
-        // Drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 24);
-        sleep(1000);
-
-        // Turn RIGHT 90 degrees
-        robot.Turn(-90, DRIVE_SPEED);
 
         robot.StopDriving();
     }

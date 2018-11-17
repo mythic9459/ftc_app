@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -29,6 +30,8 @@ public class Beholder
     public DcMotor MR = null;
     public DcMotor BL = null;
     public DcMotor BR = null;
+    public DcMotor Intake = null;
+    public CRServo IH = null;
 
 
     // create arrays for your motors (change sizes to match YOUR number of motors)
@@ -77,6 +80,8 @@ public class Beholder
         MR = OpModeReference.hardwareMap.get(DcMotor.class, "MR");
         BL = OpModeReference.hardwareMap.get(DcMotor.class, "BL");
         BR = OpModeReference.hardwareMap.get(DcMotor.class, "BR");
+        Intake = OpModeReference.hardwareMap.get(DcMotor.class, "Intake");
+        IH = OpModeReference.hardwareMap.get(CRServo.class, "IH");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
 
         // initialize the IMU
