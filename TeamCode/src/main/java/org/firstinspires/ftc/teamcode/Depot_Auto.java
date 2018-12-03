@@ -9,12 +9,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 /**
  * This is an OpMode that uses a hardware robot class
  */
-@Autonomous(name = "Crater Auto", group = "IMU1")
+@Autonomous(name = "Depot Auto", group = "IMU1")
 public class Depot_Auto extends LinearOpMode {
 
     // this is the motor power so when you make changes you can just make here
     // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
     static final double DRIVE_SPEED = 0.3;
+    //static final double DRIVE_SPEED = 0.1;
 
     @Override
     public void runOpMode() {
@@ -40,12 +41,18 @@ public class Depot_Auto extends LinearOpMode {
         // -------------------------------------------------------------------------------
 
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 24);
+        robot.Drive(DRIVE_SPEED, 45);
         sleep(1000);
 
         robot.Intake.setPower(.5);
         sleep(1000);
         robot.Intake.setPower(0);
+
+        robot.Turn(45, DRIVE_SPEED);
+        sleep(1000);
+
+        robot.Drive(DRIVE_SPEED, 80);
+        sleep(1000);
 
         // turn LEFT 90 degrees
         /*robot.Turn(90, DRIVE_SPEED);

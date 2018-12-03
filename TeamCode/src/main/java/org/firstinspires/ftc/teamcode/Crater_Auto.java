@@ -35,14 +35,13 @@ public class Crater_Auto extends LinearOpMode {
         robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
         // -------------------------------------------------------------------------------
-        // now do all of your driving and claiming depots and getting off landers or whatever
+        // now do all of your driving and claiming depots and getting off lander or whatever
         // sleeps are not required
         // -------------------------------------------------------------------------------
-
+        // HaHa You Cant do that
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 60);
+        robot.Drive(DRIVE_SPEED, 40);
         sleep(1000);
-
 
 
         // turn LEFT 90 degrees
