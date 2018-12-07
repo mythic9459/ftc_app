@@ -151,8 +151,12 @@ public class Beholder
             // stop if driver station stop button pushed
             while (OpModeReference.opModeIsActive() && (FL.isBusy() && FR.isBusy())) {
                 OpModeReference.telemetry.addData("target ticks", targetTicks);
-                OpModeReference.telemetry.addData("right current", FR.getCurrentPosition());
-                OpModeReference.telemetry.addData("left current", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
             }
 
@@ -237,8 +241,12 @@ public class Beholder
 
                 OpModeReference.telemetry.addData("target", targetAngleDifference);
                 OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
-                OpModeReference.telemetry.addData("LeftMotorPower", FL.getPower());
-                OpModeReference.telemetry.addData("RightMotorPower", FR.getPower());
+                OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
             }
             // if targetAngleDifference is Positive, we're turning LEFT
@@ -273,8 +281,12 @@ public class Beholder
                 }
                 OpModeReference.telemetry.addData("target", targetAngleDifference);
                 OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
-                OpModeReference.telemetry.addData("LeftMotorPower", FL.getPower());
-                OpModeReference.telemetry.addData("RightMotorPower", FR.getPower());
+                OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
             }
         } else {
@@ -286,4 +298,3 @@ public class Beholder
         StopDriving();
     }
 }
-

@@ -41,14 +41,14 @@ public class Depot_Auto extends LinearOpMode {
         // -------------------------------------------------------------------------------
 
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 45);
+        robot.Drive(DRIVE_SPEED, 50);
         sleep(1000);
 
         robot.Intake.setPower(.5);
         sleep(1000);
         robot.Intake.setPower(0);
 
-        robot.Turn(45, DRIVE_SPEED);
+        robot.Turn(125, DRIVE_SPEED);
         sleep(1000);
 
         robot.Drive(DRIVE_SPEED, 80);
