@@ -60,10 +60,10 @@ public class DriverBoi_Current extends LinearOpMode{
         while (opModeIsActive()) {
 
 
-             Lpower = -gamepad1.left_stick_y *0.5 ;
-             Rpower = -gamepad1.right_stick_y *0.5 ;
-             Ipower = -gamepad2.right_stick_y;
-             IHpower = gamepad2.left_stick_y;
+            Lpower = -gamepad1.left_stick_y *0.5 ;
+            Rpower = -gamepad1.right_stick_y *0.5 ;
+            Ipower = -gamepad2.right_stick_y;
+            IHpower = gamepad2.left_stick_y;
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);

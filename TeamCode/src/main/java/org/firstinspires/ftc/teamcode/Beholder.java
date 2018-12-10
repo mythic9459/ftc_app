@@ -288,6 +288,8 @@ public class Beholder
                 OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
                 OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
+
+
             }
         } else {
             // is zero - not turning - just return
