@@ -30,8 +30,8 @@ public class Beholder
     public DcMotor MR = null;
     public DcMotor BL = null;
     public DcMotor BR = null;
-    public DcMotor Intake = null;
-    public CRServo IH = null;
+    public CRServo Intake = null;
+    public DcMotor IH = null;
 
 
     // create arrays for your motors (change sizes to match YOUR number of motors)
@@ -80,8 +80,8 @@ public class Beholder
         MR = OpModeReference.hardwareMap.get(DcMotor.class, "MR");
         BL = OpModeReference.hardwareMap.get(DcMotor.class, "BL");
         BR = OpModeReference.hardwareMap.get(DcMotor.class, "BR");
-        Intake = OpModeReference.hardwareMap.get(DcMotor.class, "Intake");
-        IH = OpModeReference.hardwareMap.get(CRServo.class, "IH");
+        Intake = OpModeReference.hardwareMap.get(CRServo.class, "Intake");
+        IH = OpModeReference.hardwareMap.get(DcMotor.class, "IH");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
 
         // initialize the IMU
