@@ -64,7 +64,7 @@ public class DriverBoi_Current extends LinearOpMode{
             Lpower = -gamepad1.left_stick_y *0.5;
             Rpower = -gamepad1.right_stick_y *0.5;
             Ipower = gamepad2.right_stick_y;
-            IHpower = -gamepad2.left_stick_y *0.5;
+            IHpower = -gamepad2.left_stick_y *0.25;
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
@@ -79,7 +79,7 @@ public class DriverBoi_Current extends LinearOpMode{
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f), Hinge (%.2f", Lpower, Rpower, Ipower);
+            telemetry.addData("Motors", "Left (%.2f), Right (%.2f), Hinge (%.2f", Lpower, Rpower, Ipower);
             telemetry.update();
         }
     }

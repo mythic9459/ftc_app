@@ -14,7 +14,7 @@ public class Crater_Auto extends LinearOpMode {
 
     // this is the motor power so when you make changes you can just make here
     // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
-    static final double DRIVE_SPEED = 0.3;
+    static final double DRIVE_SPEED = 0.5;
 
     @Override
     public void runOpMode() {
