@@ -57,6 +57,7 @@ public class Crater_Auto extends LinearOpMode {
 
         robot.Turn(60, DRIVE_SPEED);
         sleep(1000);
+
         robot.Turn(83, DRIVE_SPEED);
         sleep(1000);
 

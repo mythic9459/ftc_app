@@ -47,6 +47,7 @@ public class DriverBoi_Current extends LinearOpMode{
         BL.setDirection(DcMotor.Direction.FORWARD);
         ML.setDirection(DcMotor.Direction.FORWARD);
         IH.setDirection(DcMotor.Direction.FORWARD);
+        IH.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //IntakeHinge.setDirection(DcMotor.Direction.FORWARD);
 
         double IHpower;
@@ -60,10 +61,10 @@ public class DriverBoi_Current extends LinearOpMode{
         while (opModeIsActive()) {
 
 
-            Lpower = -gamepad1.left_stick_y *0.5 ;
-            Rpower = -gamepad1.right_stick_y *0.5 ;
+            Lpower = -gamepad1.left_stick_y *0.5;
+            Rpower = -gamepad1.right_stick_y *0.5;
             Ipower = gamepad2.right_stick_y;
-            IHpower = -gamepad2.left_stick_y;
+            IHpower = -gamepad2.left_stick_y *0.5;
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
