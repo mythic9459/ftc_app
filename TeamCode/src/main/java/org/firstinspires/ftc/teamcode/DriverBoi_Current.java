@@ -47,8 +47,13 @@ public class DriverBoi_Current extends LinearOpMode{
         BL.setDirection(DcMotor.Direction.FORWARD);
         ML.setDirection(DcMotor.Direction.FORWARD);
         IH.setDirection(DcMotor.Direction.FORWARD);
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        MR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ML.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         IH.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //IntakeHinge.setDirection(DcMotor.Direction.FORWARD);
 
         double IHpower;
         double Lpower;
