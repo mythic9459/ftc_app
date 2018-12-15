@@ -23,7 +23,7 @@ public class Crater_Auto extends LinearOpMode {
         // create an instance of the hardware robot class, pass an instance of THIS OpMode
         Beholder robot = new Beholder(this);
 
-        // call the initialization methodb
+        // call the initialization method
         robot.init();
 
         // -------------------------------------------------------------------------------
@@ -40,18 +40,24 @@ public class Crater_Auto extends LinearOpMode {
         // -------------------------------------------------------------------------------
         // HaHa You Cant do that
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 36);
+        robot.Drive(DRIVE_SPEED, 8);
         sleep(1000);
 
-        robot.Turn(80, DRIVE_SPEED);
+        robot.Turn(45, DRIVE_SPEED);
         sleep(1000);
 
-        robot.Drive(DRIVE_SPEED, 70);
+        robot.Drive(DRIVE_SPEED, 40);
         sleep(1000);
 
-        robot.Turn(80, DRIVE_SPEED);
+        robot.Turn(50, DRIVE_SPEED);
         sleep(1000);
-        robot.Turn(85, DRIVE_SPEED);
+
+        robot.Drive(DRIVE_SPEED, 69);
+        sleep(1000);
+
+        robot.Turn(60, DRIVE_SPEED);
+        sleep(1000);
+        robot.Turn(83, DRIVE_SPEED);
         sleep(1000);
 
 
