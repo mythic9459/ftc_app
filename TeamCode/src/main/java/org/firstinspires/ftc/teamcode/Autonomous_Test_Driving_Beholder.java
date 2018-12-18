@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Driver Boi Current", group="Linear Opmode")
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-public class DriverBoi_Current extends LinearOpMode{
+@TeleOp(name="Autonomous Test Driving Beholder", group="Linear Opmode")
+
+public class Autonomous_Test_Driving_Beholder extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FR = null;
@@ -24,6 +24,8 @@ public class DriverBoi_Current extends LinearOpMode{
 
     @Override
     public void runOpMode() {
+        Beholder robot = new Beholder(this);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -59,8 +61,14 @@ public class DriverBoi_Current extends LinearOpMode{
         double Lpower;
         double Rpower;
         double Ipower;
+
+
+        // call the initialization method
+        robot.init();
+
         waitForStart();
         runtime.reset();
+        robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
 
         while (opModeIsActive()) {
@@ -81,13 +89,19 @@ public class DriverBoi_Current extends LinearOpMode{
                 IHpower = -gamepad2.left_stick_y *0.5;
             }
 
-            if (gamepad1.right_trigger > 0.5) {
+            if (gamepad1.dpad_up = true) {
                 Lpower = 0.5;
                 Rpower = 0.5;
             }
-            else if (gamepad1.left_trigger > 0.5) {
+            else if (gamepad1.dpad_down) {
                 Lpower = -0.5;
                 Rpower = -0.5;
+            }
+            else if (gamepad1.dpad_left = true) {
+                robot.Turn(45, 0.5);
+            }
+            else if (gamepad1.dpad_left = true) {
+                robot.Turn(45, 0.5);
             }
 
 

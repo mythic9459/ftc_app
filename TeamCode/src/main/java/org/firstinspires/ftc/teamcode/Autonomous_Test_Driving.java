@@ -1,16 +1,13 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Driver Boi Current", group="Linear Opmode")
+@TeleOp(name="Autonomous Test Driving", group="Linear Opmode")
 
-public class DriverBoi_Current extends LinearOpMode{
+public class Autonomous_Test_Driving extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor FR = null;
