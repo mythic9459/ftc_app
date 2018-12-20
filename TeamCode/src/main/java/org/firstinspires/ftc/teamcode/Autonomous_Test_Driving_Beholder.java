@@ -89,18 +89,18 @@ public class Autonomous_Test_Driving_Beholder extends LinearOpMode{
                 IHpower = -gamepad2.left_stick_y *0.5;
             }
 
-            if (gamepad1.dpad_up == true) {
+            if (gamepad1.dpad_up) {
                 Lpower = 0.5;
                 Rpower = 0.5;
             }
-            else if (gamepad1.dpad_down == true) {
+            else if (gamepad1.dpad_down) {
                 Lpower = -0.5;
                 Rpower = -0.5;
             }
-            else if (gamepad1.dpad_left == true) {
+            else if (gamepad1.dpad_left) {
                 robot.Turn(45, 0.5);
             }
-            else if (gamepad1.dpad_right == true) {
+            else if (gamepad1.dpad_right) {
                 robot.Turn(-45, 0.5);
             }
 
