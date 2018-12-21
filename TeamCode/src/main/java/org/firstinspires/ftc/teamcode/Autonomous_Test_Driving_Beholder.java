@@ -73,22 +73,6 @@ public class Autonomous_Test_Driving_Beholder extends LinearOpMode{
 
         while (opModeIsActive()) {
 
-
-            Lpower = -gamepad1.left_stick_y *0.5;
-            Rpower = -gamepad1.right_stick_y *0.5;
-            Ipower = gamepad2.right_stick_y;
-
-            if (-gamepad2.right_stick_y > 0){
-            IHpower = -gamepad2.left_stick_y *0.5;
-            }
-
-            else if(-gamepad2.right_stick_y < 0){
-                IHpower = -gamepad2.left_stick_y *0.2;
-            }
-            else {
-                IHpower = -gamepad2.left_stick_y *0.5;
-            }
-
             if (gamepad1.dpad_up) {
                 Lpower = 0.5;
                 Rpower = 0.5;
@@ -102,6 +86,26 @@ public class Autonomous_Test_Driving_Beholder extends LinearOpMode{
             }
             else if (gamepad1.dpad_right) {
                 robot.Turn(-45, 0.5);
+            }
+            else if (gamepad1.x){
+                robot.Turn(90,0.5);
+            }
+            else if (gamepad1.b){
+                robot.Turn(-90,0.5);
+            }
+
+            Lpower = -gamepad1.left_stick_y *0.5;
+            Rpower = -gamepad1.right_stick_y *0.5;
+            Ipower = gamepad2.right_stick_y;
+
+            if (-gamepad2.right_stick_y > 0){
+                IHpower = -gamepad2.left_stick_y *0.5;
+            }
+            else if(-gamepad2.right_stick_y < 0){
+                IHpower = -gamepad2.left_stick_y *0.2;
+            }
+            else {
+                IHpower = -gamepad2.left_stick_y *0.5;
             }
 
 
