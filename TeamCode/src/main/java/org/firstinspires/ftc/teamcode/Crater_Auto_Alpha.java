@@ -41,7 +41,19 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         // -------------------------------------------------------------------------------
         // HaHa You Cant do that
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 8);
+        robot.Drive(DRIVE_SPEED, 16);
+        sleep(1000);
+
+        robot.Drive(DRIVE_SPEED, 4);
+        sleep(1000);
+
+        robot.Drive(DRIVE_SPEED, -4);
+        sleep(1000);
+
+        robot.Turn(90, DRIVE_SPEED);
+        sleep(1000);
+
+        robot.Drive(DRIVE_SPEED, 40);
         sleep(1000);
 
         robot.Turn(45, DRIVE_SPEED);
@@ -50,27 +62,9 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         robot.Drive(DRIVE_SPEED, 40);
         sleep(1000);
 
-        robot.Turn(50, DRIVE_SPEED);
-        sleep(1000);
-
-        robot.Drive(DRIVE_SPEED, 69);
-        sleep(1000);
-
-        robot.Turn(60, DRIVE_SPEED);
-        sleep(1000);
-
-        robot.Turn(83, DRIVE_SPEED);
-        sleep(1000);
+        robot.Drive(DRIVE_SPEED, -90);
 
 
-        robot.Drive(DRIVE_SPEED, 80);
-        sleep(1000);
-
-        robot.Turn(30, DRIVE_SPEED);
-        sleep(1000);
-
-        robot.Drive(DRIVE_SPEED, 80);
-        sleep(1000);
 
 
         // turn LEFT 90 degrees
