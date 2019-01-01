@@ -15,7 +15,7 @@ public class Crater_Auto_Alpha extends LinearOpMode {
 
     // this is the motor power so when you make changes you can just make here
     // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
-    static final double DRIVE_SPEED = 0.5;
+    static final double DRIVE_SPEED = 0.2;
 
     @Override
     public void runOpMode() {
@@ -41,28 +41,27 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         // -------------------------------------------------------------------------------
         // HaHa You Cant do that
         // drive forward about 24 inches
-        robot.Drive(DRIVE_SPEED, 20);
-        sleep(1000);
+        robot.Drive(DRIVE_SPEED, 32);
+        sleep(100);
 
-        robot.Drive(DRIVE_SPEED, 12);
-        sleep(1000);
 
-        robot.Drive(DRIVE_SPEED, -12);
-        sleep(1000);
+
+        robot.Drive(DRIVE_SPEED, -10);
+        sleep(100);
 
         robot.Turn(85, DRIVE_SPEED);
-        sleep(1000);
+        sleep(100);
+
+        robot.Drive(DRIVE_SPEED, 46);
+        sleep(100);
+
+        robot.Turn(42, DRIVE_SPEED);
+        sleep(100);
 
         robot.Drive(DRIVE_SPEED, 40);
-        sleep(1000);
+        sleep(100);
 
-        robot.Turn(40, DRIVE_SPEED);
-        sleep(1000);
-
-        robot.Drive(DRIVE_SPEED, 40);
-        sleep(1000);
-
-        robot.Drive(DRIVE_SPEED, -90);
+        robot.Drive(DRIVE_SPEED, -95);
 
 
 
