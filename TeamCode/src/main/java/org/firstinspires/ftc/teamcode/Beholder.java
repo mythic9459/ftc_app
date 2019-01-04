@@ -227,15 +227,15 @@ public class Beholder
                 // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : RightMotors)
-                        m.setPower(-power/4);
+                        m.setPower(-power / 4);
                     for (DcMotor m : LeftMotors)
-                        m.setPower(power/4);
+                        m.setPower(power / 4);
                     secondStepDownComplete = true;
                 } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
                     for (DcMotor m : RightMotors)
-                        m.setPower(-power/2);
+                        m.setPower(-power / 2);
                     for (DcMotor m : LeftMotors)
-                        m.setPower(power/2);
+                        m.setPower(power / 2);
                     firstStepDownComplete = true;
                 }
 
@@ -258,7 +258,7 @@ public class Beholder
                 m.setPower(-power);
 
             // WARNING not sure if this sleep is needed - seemed necessary for right turns
-            OpModeReference.sleep (100);
+            OpModeReference.sleep(100);
 
             // we're turning right, so our target angle difference will be positive (ex: 90)
             // so GetAngleDifference will go from 0 to 90
@@ -268,13 +268,192 @@ public class Beholder
                 // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : RightMotors)
+                        m.setPower(power / 4);
+                    for (DcMotor m : LeftMotors)
+                        m.setPower(-power / 4);
+                    secondStepDownComplete = true;
+                } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
+                    for (DcMotor m : RightMotors)
+                        m.setPower(power / 2);
+                    for (DcMotor m : LeftMotors)
+                        m.setPower(-power / 2);
+                    firstStepDownComplete = true;
+                }
+                OpModeReference.telemetry.addData("target", targetAngleDifference);
+                OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
+                OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
+                OpModeReference.telemetry.update();
+
+
+            }
+        } else {
+            // is zero - not turning - just return
+            return;
+
+        }
+    }
+
+
+    public void TurnR(double targetAngleDifference, double power) {
+
+            // before starting the turn, take note of current angle as startAngle
+            double startAngle = GetCurrentZAngle();
+
+            // just some boolean variables to tell if we've stepped motor power down
+            // might actually want more than two steps
+            boolean firstStepDownComplete = false;
+            boolean secondStepDownComplete = false;
+
+            // if target angle is Negative, we're turning RIGHT
+        if (targetAngleDifference < 0) {
+                // turning right, so we want all right motors going backwards
+                for (DcMotor m : RightMotors)
+                    m.setPower(-power);
+                // sleep a tenth of a second
+                // WARNING - not sure why this is needed - but sometimes right turns didn't work without
+                OpModeReference.sleep(100);
+
+                // we're turning right, so our target angle difference will be negative (ex: -90)
+                // so GetAngleDifference will go from 0 to -90
+                // keep turning while difference is greater than target
+                while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
+
+                    // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                    if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
+                        for (DcMotor m : RightMotors)
+                            m.setPower(-power/4);
+                        secondStepDownComplete = true;
+                    } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
+                        for (DcMotor m : RightMotors)
+                            m.setPower(-power/2);
+                        firstStepDownComplete = true;
+                    }
+
+                    OpModeReference.telemetry.addData("target", targetAngleDifference);
+                    OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
+                    OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                    OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                    OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
+                    OpModeReference.telemetry.update();
+                }
+                // if targetAngleDifference is Positive, we're turning LEFT
+            } else if (targetAngleDifference > 0) {
+                // turning left so want all left motors going backwards
+                for (DcMotor m : RightMotors)
+                    m.setPower(power);
+
+                // WARNING not sure if this sleep is needed - seemed necessary for right turns
+                OpModeReference.sleep (100);
+
+                // we're turning right, so our target angle difference will be positive (ex: 90)
+                // so GetAngleDifference will go from 0 to 90
+                // keep turning while difference is less than target
+                while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) < targetAngleDifference) {
+
+                    // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                    if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
+                        for (DcMotor m : RightMotors)
+                            m.setPower(power/4);
+                        secondStepDownComplete = true;
+                    } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
+                        for (DcMotor m : RightMotors)
+                            m.setPower(power/2);
+                        firstStepDownComplete = true;
+                    }
+                    OpModeReference.telemetry.addData("target", targetAngleDifference);
+                    OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
+                    OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                    OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                    OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                    OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
+                    OpModeReference.telemetry.update();
+
+
+                }
+            } else {
+                // is zero - not turning - just return
+                return;
+            }
+
+        // Turn all motors off
+        StopDriving();
+    }
+
+    public void TurnL(double targetAngleDifference, double power) {
+
+        // before starting the turn, take note of current angle as startAngle
+        double startAngle = GetCurrentZAngle();
+
+        // just some boolean variables to tell if we've stepped motor power down
+        // might actually want more than two steps
+        boolean firstStepDownComplete = false;
+        boolean secondStepDownComplete = false;
+
+        // if target angle is Negative, we're turning RIGHT
+        if (targetAngleDifference < 0) {
+            // turning right, so we want all right motors going backwards
+            for (DcMotor m : LeftMotors)
+                m.setPower(power);
+            // sleep a tenth of a second
+            // WARNING - not sure why this is needed - but sometimes right turns didn't work without
+            OpModeReference.sleep(100);
+
+            // we're turning right, so our target angle difference will be negative (ex: -90)
+            // so GetAngleDifference will go from 0 to -90
+            // keep turning while difference is greater than target
+            while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
+
+                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
+                    for (DcMotor m : LeftMotors)
                         m.setPower(power/4);
+                    secondStepDownComplete = true;
+                } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
+                    for (DcMotor m : LeftMotors)
+                        m.setPower(power/2);
+                    firstStepDownComplete = true;
+                }
+
+                OpModeReference.telemetry.addData("target", targetAngleDifference);
+                OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
+                OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
+                OpModeReference.telemetry.addData("FLC", FL.getCurrentPosition());
+                OpModeReference.telemetry.addData("MRC", MR.getCurrentPosition());
+                OpModeReference.telemetry.addData("MLC", ML.getCurrentPosition());
+                OpModeReference.telemetry.addData("BRC", BR.getCurrentPosition());
+                OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
+                OpModeReference.telemetry.update();
+            }
+            // if targetAngleDifference is Positive, we're turning LEFT
+        } else if (targetAngleDifference > 0) {
+            // turning left so want all left motors going backwards
+            for (DcMotor m : LeftMotors)
+                m.setPower(-power);
+
+            // WARNING not sure if this sleep is needed - seemed necessary for right turns
+            OpModeReference.sleep (100);
+
+            // we're turning right, so our target angle difference will be positive (ex: 90)
+            // so GetAngleDifference will go from 0 to 90
+            // keep turning while difference is less than target
+            while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) < targetAngleDifference) {
+
+                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : LeftMotors)
                         m.setPower(-power/4);
                     secondStepDownComplete = true;
                 } else if (!firstStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.50) {
-                    for (DcMotor m : RightMotors)
-                        m.setPower(power/2);
                     for (DcMotor m : LeftMotors)
                         m.setPower(-power/2);
                     firstStepDownComplete = true;

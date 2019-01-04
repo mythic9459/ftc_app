@@ -55,7 +55,9 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         robot.Drive(DRIVE_SPEED, 46);
         sleep(100);
 
-        robot.Turn(42, DRIVE_SPEED);
+        robot.Turn(43,DRIVE_SPEED);
+        //robot.Turn(42, DRIVE_SPEED);
+        //Old one that hit our outlying jewel.
         sleep(100);
 
         robot.Drive(DRIVE_SPEED, 40);
