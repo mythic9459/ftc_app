@@ -14,7 +14,7 @@ public class Depot_Auto extends LinearOpMode {
 
     // this is the motor power so when you make changes you can just make here
     // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
-    static final double DRIVE_SPEED = 0.3;
+    static final double DRIVE_SPEED = 0.2;
     static final double TURBO_LAD = 0.5;
     //static final double DRIVE_SPEED = 0.3;
 
@@ -45,25 +45,25 @@ public class Depot_Auto extends LinearOpMode {
 
 
         robot.Drive(DRIVE_SPEED, 60);
-        sleep(1000);
+        sleep(100);
 
         robot.Intake.setPower(.5);
-        sleep(1000);
+        sleep(100);
         robot.Intake.setPower(0);
 
         robot.Turn(-125, DRIVE_SPEED);
-        sleep(1000);
+        sleep(100);
 
         robot.Drive(DRIVE_SPEED, 85);
-        sleep(1000);
+        sleep(100);
         // turn LEFT 90 degrees
         // turn RIGHT 90 degrees
         /*robot.Turn(-90, DRIVE_SPEED);
-        sleep(1000);*/
+        sleep(100);*/
 
         /*robot.Turn(90, DRIVE_SPEED);
         robot.StopDriving();
 
-        sleep(1000);*/
+        sleep(100);*/
     }
 }
