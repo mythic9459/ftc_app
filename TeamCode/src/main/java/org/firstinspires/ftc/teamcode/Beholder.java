@@ -57,7 +57,7 @@ public class Beholder
     // This bit is a method for all of the initialization code.
     public void init() {
 
-        //this is the imu setup code.
+        //This is the imu setup code.
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -81,16 +81,15 @@ public class Beholder
         // initialize the IMU
         imu.initialize(parameters);
 
-        // now add each motor to your motor arrays (this example only has 2 motors)
-        // left
+        // Now we add the motors to the arrays.
         LeftMotors[0] = FL;
         LeftMotors[1] = ML;
         LeftMotors[2] = BL;
-        // right
+
         RightMotors[0] = FR;
         RightMotors[1] = MR;
         RightMotors[2] = BR;
-        // all
+
         AllMotors[0] = FL;
         AllMotors[1] = FR;
         AllMotors[2] = ML;
@@ -98,51 +97,50 @@ public class Beholder
         AllMotors[4] = BL;
         AllMotors[5] = BR;
 
-        // set the direction for all left, then all right motors
+        //Now set the direction for all left, then all right motors
         for (DcMotor m : LeftMotors)
             m.setDirection(DcMotor.Direction.FORWARD);
         for (DcMotor m : RightMotors)
             m.setDirection(DcMotor.Direction.REVERSE);
 
-        // set any properties that apply to ALL motors
+        // Now we set any properties that apply to all of the motors
         for (DcMotor m : AllMotors) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 
-    // just a method to stop driving
+    //This is just a method to stop driving
     public void StopDriving() {
         for (DcMotor m : AllMotors)
             m.setPower(0);
     }
 
-    // this is a drive method - takes speed and inches
-    // WARNING: YOU WILL NEED TO IMPLEMENT REVERSE
+    //This is a drive method that takes speed and inches.
     public void Drive(double speed, double inches) {
-        // Ensure that the opmode is still active
+        //Ensure that the opmode is still active.
         if (OpModeReference.opModeIsActive()) {
 
-            // calculate the number of ticks you want to travel (cast to integer)
+            //Now we calculate the number of ticks we want to travel (cast to integer).
             int targetTicks = (int) (inches * COUNTS_PER_INCH);
 
-            // reset ticks to 0 on all motors
+            //Now we reset ticks to 0 on all motors.
             for (DcMotor m : AllMotors)
                 m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-            // set target position on all motors
-            // mode must be changed to RUN_TO_POSITION
+            //Now we set target position on all motors.
+            //Also, the mode must be changed to RUN_TO_POSITION.
             for(DcMotor m : AllMotors) {
                 m.setTargetPosition(targetTicks);
                 m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
 
-            // turn all motors on!
+            //Now we turn all motors on!
             for (DcMotor m : AllMotors)
                 m.setPower(speed);
 
-            // just keep looping while both motors are busy
-            // stop if driver station stop button pushed
+            //Now we just keep looping while both motors are busy.
+            //It should be able to stop if driver station stop button pushed.
             while (OpModeReference.opModeIsActive() && (FL.isBusy() && FR.isBusy())) {
                 OpModeReference.telemetry.addData("target ticks", targetTicks);
                 OpModeReference.telemetry.addData("FRC", FR.getCurrentPosition());
@@ -154,32 +152,31 @@ public class Beholder
                 OpModeReference.telemetry.update();
             }
 
-            // once all motors get to where they need to be, turn them off
+            //And once all motors get to where they need to be, turn them off
             StopDriving();
 
-            // set motors back to RUN_USING_ENCODERS
+            //Now we set motors back to RUN_USING_ENCODERS
             for (DcMotor m : AllMotors)
                 m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 
-    // this is a method to get the current heading/z angle from the IMU
-    // WE WANT THE Z ANGLE :)
-    // AxesOrder.XYZ means we want thirdAngle
-    // AxesOrder.ZYX would mean we want firstAngle
+    //This is a method to get the current heading/z angle from the IMU.
+    //Brief aside, we want the Z angle for our purposes.
+    //AxesOrder.XYZ means we want thirdAngle.
+    //AxesOrder.ZYX would mean we want firstAngle.
     public double GetCurrentZAngle() {
         Orientation currentAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
         return currentAngles.thirdAngle;
     }
 
-    // This method calculates the difference of the current angle from the start angle
-    // If you're left of your original angle, the value will be POSITIVE
-    // If you're right of your original angle, the value will be NEGATIVE
+    //This method calculates the difference of the current angle from the start angle.
+    //If we're left of your original angle, the value will be POSITIVE.
+    //If we're right of your original angle, the value will be NEGATIVE.
     public double GetAngleDifference(double startAngle) {
         double angleDifference = GetCurrentZAngle() - startAngle;
 
-        // handle going past the 0 or 180 barriers
-        // where we switch from positive to negative or vice versa
+        //Now we handle going past the 0 or 180 barriers, where we switch from positive to negative or vice versa
         if (angleDifference < -180)
             angleDifference += 360;
         else if (angleDifference > 180)
@@ -188,29 +185,26 @@ public class Beholder
         return angleDifference;
     }
 
-    // This method makes the robot turn.
-    // DO NOT try to turn more than 180 degrees in either direction
-    // targetAngleDifference is the number of degrees you want to turn
-    // should be positive if turning left, negative if turning right
+    //This method makes the robot turn.
+    //With the structure of the code, we can't turn more than 180 degrees in either direction.
+    //Our targetAngleDifference is the number of degrees we want to turn.
+    //The targetAngleDifference should be positive if turning left, negative if turning right.
     public void Turn(double targetAngleDifference, double power) {
 
-        // before starting the turn, take note of current angle as startAngle
+        // Before starting the turn, take note of current angle as startAngle
         double startAngle = GetCurrentZAngle();
 
-        // just some boolean variables to tell if we've stepped motor power down
-        // might actually want more than two steps
+        // These are some boolean variables to tell if we've stepped motor power down.
         boolean firstStepDownComplete = false;
         boolean secondStepDownComplete = false;
 
-        // if target angle is Negative, we're turning RIGHT
+        // If our target angle is negative, we're turning right.
         if (targetAngleDifference < 0) {
-            // turning right, so we want all right motors going backwards
+            // We're turning right, so we want all right motors going backwards.
             for (DcMotor m : RightMotors)
                 m.setPower(-power);
             for (DcMotor m : LeftMotors)
                 m.setPower(power);
-            // sleep a tenth of a second
-            // WARNING - not sure why this is needed - but sometimes right turns didn't work without
             OpModeReference.sleep(100);
 
             // we're turning right, so our target angle difference will be negative (ex: -90)
