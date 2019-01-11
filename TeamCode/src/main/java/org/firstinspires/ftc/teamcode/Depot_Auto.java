@@ -12,58 +12,42 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 @Autonomous(name = "Depot Auto", group = "IMU1")
 public class Depot_Auto extends LinearOpMode {
 
-    // this is the motor power so when you make changes you can just make here
-    // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
+    //Our autonomous programs use a standardized drive speed, so we set that up here.
     static final double DRIVE_SPEED = 0.2;
-    static final double TURBO_LAD = 0.5;
-    //static final double DRIVE_SPEED = 0.3;
 
     @Override
     public void runOpMode() {
 
-        // -------------------------------------------------------------------------------
-        // create an instance of the hardware robot class, pass an instance of THIS OpMode
+        //Now we create an instance of the hardware robot class, and pass an instance of this OpMode.
+        //This allows us to access our autonomous source opmode, with our driving and turning methods.
         Beholder robot = new Beholder(this);
 
-        // call the initialization method
+        //Now we call the initialization method.
         robot.init();
 
-        // -------------------------------------------------------------------------------
-        // Wait until the start button is clicked!
+        //Wait until the start button is clicked!
         waitForStart();
 
-        // -------------------------------------------------------------------------------
-        // Start the logging of measured acceleration
+        //Now we start the logging of measured acceleration.
         robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
-        // -------------------------------------------------------------------------------
-        // now do all of your driving and claiming depots and getting off landers or whatever
-        // sleeps are not required
-        // -------------------------------------------------------------------------------
-
-        // drive forward about 24 inches
-
-
+        //This drives us to the alliance depot.
         robot.Drive(DRIVE_SPEED, 60);
         sleep(100);
 
+        //Now we drop off our game piece.
         robot.Intake.setPower(.5);
         sleep(100);
         robot.Intake.setPower(0);
 
+        //Now we turn to face the back of our robot to the crater.
         robot.Turn(43, DRIVE_SPEED);
         sleep(100);
 
+        //Now we drive across the field and into the crater.
         robot.Drive(DRIVE_SPEED, -85);
-        sleep(100);
-        // turn LEFT 90 degrees
-        // turn RIGHT 90 degrees
-        /*robot.Turn(-90, DRIVE_SPEED);
-        sleep(100);*/
 
-        /*robot.Turn(90, DRIVE_SPEED);
+        //Now we manually stop, just in case.
         robot.StopDriving();
-
-        sleep(100);*/
     }
 }

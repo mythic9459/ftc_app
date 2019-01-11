@@ -13,70 +13,55 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 @Autonomous(name = "Crater Auto Alpha", group = "IMU1")
 public class Crater_Auto_Alpha extends LinearOpMode {
 
-    // this is the motor power so when you make changes you can just make here
-    // feel free to define multiple like FULL_POWER, HALF_POWER, etc.
+    //Our autonomous programs use a standardized drive speed, so we set that up here.
     static final double DRIVE_SPEED = 0.2;
 
     @Override
     public void runOpMode() {
 
-        // -------------------------------------------------------------------------------
-        // create an instance of the hardware robot class, pass an instance of THIS OpMode
+        //Now we create an instance of the hardware robot class, and pass an instance of this OpMode.
+        //This allows us to access our autonomous source opmode, with our driving and turning methods.
         Beholder robot = new Beholder(this);
 
-        // call the initialization method
+        //Now we call the initialization method.
         robot.init();
 
-        // -------------------------------------------------------------------------------
         // Wait until the start button is clicked!
         waitForStart();
 
-        // -------------------------------------------------------------------------------
-        // Start the logging of measured acceleration
+        //Now we start the logging of measured acceleration.
         robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
-        // -------------------------------------------------------------------------------
-        // now do all of your driving and claiming depots and getting off lander or whatever
-        // sleeps are not required
-        // -------------------------------------------------------------------------------
-        // HaHa You Cant do that
-        // drive forward about 24 inches
+        //Now we drive to the lip of the crater & knock off the center mineral.
         robot.Drive(DRIVE_SPEED, 32);
         sleep(100);
 
-
-
+        //Now we back up so as to not hit the other minerals.
         robot.Drive(DRIVE_SPEED, -10);
         sleep(100);
 
+        //Now we turn to be parallel with the markers for the minerals.
         robot.Turn(85, DRIVE_SPEED);
         sleep(100);
 
+        //Now we drive towards our alliance's wall and stop short.
         robot.Drive(DRIVE_SPEED, 46);
         sleep(100);
 
+        //Now we turn to face the alliance depot.
         robot.Turn(43,DRIVE_SPEED);
-        //robot.Turn(42, DRIVE_SPEED);
-        //Old one that hit our outlying jewel.
         sleep(100);
 
+        //Now we drive to the alliance depot.
         robot.Drive(DRIVE_SPEED, 40);
         sleep(100);
 
+        //Now we drop off our game piece.
+
+        //Now we drive backwards across the field and into the crater.
         robot.Drive(DRIVE_SPEED, -95);
 
-
-
-
-        // turn LEFT 90 degrees
-        /*robot.Turn(90, DRIVE_SPEED);
-        sleep(1000);*/
-        // turn RIGHT 90 degrees
-        /*robot.Turn(-90, DRIVE_SPEED);
-        sleep(1000);*/
-
-
-
+        //Now we manually stop, just in case.
         robot.StopDriving();
     }
 }

@@ -78,7 +78,7 @@ public class Beholder
         IH = OpModeReference.hardwareMap.get(DcMotor.class, "IH");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
 
-        //initialize the IMU
+        //Now we initialize the IMU.
         imu.initialize(parameters);
 
         //Now we add the motors to the arrays.
