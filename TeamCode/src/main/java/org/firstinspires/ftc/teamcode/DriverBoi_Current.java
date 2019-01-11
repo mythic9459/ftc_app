@@ -60,7 +60,15 @@ public class DriverBoi_Current extends LinearOpMode{
         double Lpower;
         double Rpower;
         double Ipower;
+        IHpower = 0;
+        Lpower = 0;
+        Rpower = 0;
+        Ipower = 0;
         //Here we set up our variables to let us set the motor power.
+
+        boolean TurboSpeed;
+        TurboSpeed = true;
+        //Now we create a variable to toggle our motors from half power to full power.
 
         waitForStart();
         runtime.reset();
@@ -68,33 +76,50 @@ public class DriverBoi_Current extends LinearOpMode{
 
         while (opModeIsActive()) {
 
+            if (gamepad1.right_bumper && TurboSpeed) {
+                TurboSpeed = false;
+            }
+            if (gamepad1.right_bumper && !TurboSpeed) {
+                TurboSpeed = true;
+            }
+            //This allows us to press a button and toggle TurboSpeed.
 
-            Lpower = -gamepad1.left_stick_y *0.5;
-            Rpower = -gamepad1.right_stick_y *0.5;
-            Ipower = gamepad2.right_stick_y;
+            if (TurboSpeed) {
+                Lpower = -gamepad1.left_stick_y * 0.5;
+                Rpower = -gamepad1.right_stick_y * 0.5;
+                Ipower = gamepad2.right_stick_y;
+            }
+            else if (!TurboSpeed) {
+                Lpower = -gamepad1.left_stick_y;
+                Rpower = -gamepad1.right_stick_y;
+                Ipower = gamepad2.right_stick_y;
+            }
+            else{
+                Lpower = -gamepad1.left_stick_y * 0.5;
+                Rpower = -gamepad1.right_stick_y * 0.5;
+                Ipower = gamepad2.right_stick_y;
+            }
             //Here we take the inputs from the joysticks and put them into variables.
-            //Lpower and Rpower apply to the left and right sets of wheel respectively.
-            //Ipower applies to our intake servo.
+            //The first one allows us to use our the full speed of our motors.
 
             //The following section of code is designed to slow the hinge on our intake on its descent, preventing it from slamming into the ground
-            if (-gamepad2.right_stick_y > 0){
-            IHpower = -gamepad2.left_stick_y *0.5;
+            if (-gamepad2.right_stick_y > 0) {
+                IHpower = -gamepad2.left_stick_y * 0.5;
             }
             //This is for the ascent, in which we keep the power at its normal level
-            else if(-gamepad2.right_stick_y < 0){
-                IHpower = -gamepad2.left_stick_y *0.2;
+            else if (-gamepad2.right_stick_y < 0) {
+                IHpower = -gamepad2.left_stick_y * 0.2;
             }
             //This is for the descent, so we decrease our variable, thus decreasing the motor's power.
             else {
-                IHpower = -gamepad2.left_stick_y *0.5;
+                IHpower = -gamepad2.left_stick_y * 0.5;
             }
             //The code got angry without this last bit, as it didn't account for -gamepad2.right_stick_y = 0.
 
             if (gamepad1.right_trigger > 0.5) {
                 Lpower = 0.5;
                 Rpower = 0.5;
-            }
-            else if (gamepad1.left_trigger > 0.5) {
+            } else if (gamepad1.left_trigger > 0.5) {
                 Lpower = -0.5;
                 Rpower = -0.5;
             }
@@ -108,9 +133,9 @@ public class DriverBoi_Current extends LinearOpMode{
             ML.setPower(Lpower);
             //Here we set the power to our drive motors.
             Intake.setPower(Ipower);
-            //Here we set the power to our drive motors.
+            //Here we set the power to our intake servo motors.
             IH.setPower(IHpower);
-            //Here we set the power to our drive motors.
+            //Here we set the power to our intake's hinge.
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "Left (%.2f), Right (%.2f), Hinge (%.2f", Lpower, Rpower, IHpower);
