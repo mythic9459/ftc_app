@@ -51,10 +51,10 @@ public class Depot_Auto extends LinearOpMode {
         sleep(100);
         robot.Intake.setPower(0);
 
-        robot.Turn(-125, DRIVE_SPEED);
+        robot.Turn(43, DRIVE_SPEED);
         sleep(100);
 
-        robot.Drive(DRIVE_SPEED, 85);
+        robot.Drive(DRIVE_SPEED, -85);
         sleep(100);
         // turn LEFT 90 degrees
         // turn RIGHT 90 degrees

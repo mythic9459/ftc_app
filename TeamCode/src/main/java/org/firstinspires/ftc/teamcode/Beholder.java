@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  */
 public class Beholder
 {
-    // declare hardware imu, motors, servos, sensors
+    //Here we start setting up our motors, servos, and our imu device.
     BNO055IMU imu;
     public DcMotor FL = null;
     public DcMotor FR = null;
@@ -34,36 +34,30 @@ public class Beholder
     public DcMotor IH = null;
 
 
-    // create arrays for your motors (change sizes to match YOUR number of motors)
+    //Now we're making arrays for our motors, allowing us to easily reference our right motors and our left motors.
     public DcMotor[] LeftMotors = new DcMotor[3];
     public DcMotor[] RightMotors = new DcMotor[3];
     public DcMotor[] AllMotors = new DcMotor[6];
 
-    // you will need a reference to your OpMode
+    //Here we'll represent our opmode.
     private LinearOpMode OpModeReference;
 
-    // define and calculate constants...
-    //static final double     COUNTS_PER_MOTOR_ORBITAL = 1120 ;    // REV Hex HD 40:1
+    //Here we define & calculate some math to let us set our motors to run for a set distance.
     static final double     COUNTS_PER_MOTOR_ORBITAL = 537.6 ;    // Orbital 20
     static final double     WHEEL_DIAMETER_INCHES   = 4;     // For figuring circumference
     static final double     WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * Math.PI;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_ORBITAL / WHEEL_CIRCUMFERENCE_INCHES);
 
 
-       // this is the CONSTRUCTOR for this class
-    // from your OpMode, you'll have to pass a reference to the OpMode as the parameter
-    // Will look like this:
-    //      Beholder robot = new Beholder(this);
+    //This part lets us reference this file in our autonomous programs.
     public Beholder(LinearOpMode opMode) {
         OpModeReference = opMode;
     }
 
-    // This is a method for all of the initialization code - all of the
-    // stuff that happens after clicking the init button, but before
-    // clicking the start button.
+    // This bit is a method for all of the initialization code.
     public void init() {
 
-        // this is the IMU crap...just...accept it.
+        //this is the imu setup code.
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -304,26 +298,24 @@ public class Beholder
             // before starting the turn, take note of current angle as startAngle
             double startAngle = GetCurrentZAngle();
 
-            // just some boolean variables to tell if we've stepped motor power down
+            // These are just some boolean variables to tell if we've stepped motor power down.
             // might actually want more than two steps
             boolean firstStepDownComplete = false;
             boolean secondStepDownComplete = false;
 
-            // if target angle is Negative, we're turning RIGHT
+            // If our target angle is negative, we're turning right.
         if (targetAngleDifference < 0) {
                 // turning right, so we want all right motors going backwards
                 for (DcMotor m : RightMotors)
                     m.setPower(-power);
-                // sleep a tenth of a second
-                // WARNING - not sure why this is needed - but sometimes right turns didn't work without
                 OpModeReference.sleep(100);
 
-                // we're turning right, so our target angle difference will be negative (ex: -90)
-                // so GetAngleDifference will go from 0 to -90
-                // keep turning while difference is greater than target
+                // Now we're turning right, so our target angle difference will be negative (ex: -90).
+                // So now GetAngleDifference will go from 0 to -90.
+                // Now we keep turning while the difference is greater than target.
                 while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
 
-                    // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                    // This bit of code helps us step down our motor power when we turn so we don't overshoot our target.
                     if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                         for (DcMotor m : RightMotors)
                             m.setPower(-power/4);

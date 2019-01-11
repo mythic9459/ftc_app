@@ -21,6 +21,7 @@ public class DriverBoi_Current extends LinearOpMode{
     private DcMotor ML = null;
     private CRServo Intake = null;
     private DcMotor IH = null;
+    //Here we start setting up our motors.
 
     @Override
     public void runOpMode() {
@@ -36,9 +37,7 @@ public class DriverBoi_Current extends LinearOpMode{
         ML = hardwareMap.get(DcMotor.class, "ML");
         Intake = hardwareMap.get(CRServo.class, "Intake");
         IH = hardwareMap.get(DcMotor.class, "IH");
-
-
-
+        //Here we finish setting up all our motors.
 
         FR.setDirection(DcMotor.Direction.REVERSE);
         BR.setDirection(DcMotor.Direction.REVERSE);
@@ -47,6 +46,7 @@ public class DriverBoi_Current extends LinearOpMode{
         BL.setDirection(DcMotor.Direction.FORWARD);
         ML.setDirection(DcMotor.Direction.FORWARD);
         IH.setDirection(DcMotor.Direction.FORWARD);
+        //Here we set the right set of motors to reverse to let us not spin when we drive.
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         MR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,11 +54,14 @@ public class DriverBoi_Current extends LinearOpMode{
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         IH.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //Here we tell all motors to brake when they're not recieving commands.
 
         double IHpower;
         double Lpower;
         double Rpower;
         double Ipower;
+        //Here we set up our variables to let us set the motor power.
+
         waitForStart();
         runtime.reset();
 
@@ -69,17 +72,23 @@ public class DriverBoi_Current extends LinearOpMode{
             Lpower = -gamepad1.left_stick_y *0.5;
             Rpower = -gamepad1.right_stick_y *0.5;
             Ipower = gamepad2.right_stick_y;
+            //Here we take the inputs from the joysticks and put them into variables.
+            //Lpower and Rpower apply to the left and right sets of wheel respectively.
+            //Ipower applies to our intake servo.
 
+            //The following section of code is designed to slow the hinge on our intake on its descent, preventing it from slamming into the ground
             if (-gamepad2.right_stick_y > 0){
             IHpower = -gamepad2.left_stick_y *0.5;
             }
-
+            //This is for the ascent, in which we keep the power at its normal level
             else if(-gamepad2.right_stick_y < 0){
                 IHpower = -gamepad2.left_stick_y *0.2;
             }
+            //This is for the descent, so we decrease our variable, thus decreasing the motor's power.
             else {
                 IHpower = -gamepad2.left_stick_y *0.5;
             }
+            //The code got angry without this last bit, as it didn't account for -gamepad2.right_stick_y = 0.
 
             if (gamepad1.right_trigger > 0.5) {
                 Lpower = 0.5;
@@ -89,7 +98,7 @@ public class DriverBoi_Current extends LinearOpMode{
                 Lpower = -0.5;
                 Rpower = -0.5;
             }
-
+            //These bits allow us to drive straight forwards & backward.
 
             FR.setPower(Rpower);
             BR.setPower(Rpower);
@@ -97,15 +106,16 @@ public class DriverBoi_Current extends LinearOpMode{
             FL.setPower(Lpower);
             BL.setPower(Lpower);
             ML.setPower(Lpower);
+            //Here we set the power to our drive motors.
             Intake.setPower(Ipower);
-
+            //Here we set the power to our drive motors.
             IH.setPower(IHpower);
-
-
+            //Here we set the power to our drive motors.
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "Left (%.2f), Right (%.2f), Hinge (%.2f", Lpower, Rpower, IHpower);
             telemetry.update();
+            //Here we use some simple telemetry to display the running time and motor power levels.
         }
     }
 }
