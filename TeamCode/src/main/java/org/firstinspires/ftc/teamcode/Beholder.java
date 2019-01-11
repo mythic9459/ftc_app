@@ -43,8 +43,8 @@ public class Beholder
     private LinearOpMode OpModeReference;
 
     //Here we define & calculate some math to let us set our motors to run for a set distance.
-    static final double     COUNTS_PER_MOTOR_ORBITAL = 537.6 ;    // Orbital 20
-    static final double     WHEEL_DIAMETER_INCHES   = 4;     // For figuring circumference
+    static final double     COUNTS_PER_MOTOR_ORBITAL = 537.6 ;    //For our Orbital 20s.
+    static final double     WHEEL_DIAMETER_INCHES   = 4;     //For figuring circumference.
     static final double     WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * Math.PI;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_ORBITAL / WHEEL_CIRCUMFERENCE_INCHES);
 
@@ -54,20 +54,20 @@ public class Beholder
         OpModeReference = opMode;
     }
 
-    // This bit is a method for all of the initialization code.
+    //This bit is a method for all of the initialization code.
     public void init() {
 
         //This is the imu setup code.
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; //Note: see the calibration sample opmode for more info.
         parameters.loggingEnabled      = true;
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        // get all your hardware from the hardware map
-        // defined in the config on your robot controller phone.
+        //get all your hardware from the hardware map
+        //defined in the config on your robot controller phone.
         FL = OpModeReference.hardwareMap.get(DcMotor.class, "FL");
         FR = OpModeReference.hardwareMap.get(DcMotor.class, "FR");
         ML = OpModeReference.hardwareMap.get(DcMotor.class, "ML");
@@ -78,10 +78,10 @@ public class Beholder
         IH = OpModeReference.hardwareMap.get(DcMotor.class, "IH");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
 
-        // initialize the IMU
+        //initialize the IMU
         imu.initialize(parameters);
 
-        // Now we add the motors to the arrays.
+        //Now we add the motors to the arrays.
         LeftMotors[0] = FL;
         LeftMotors[1] = ML;
         LeftMotors[2] = BL;
@@ -103,7 +103,7 @@ public class Beholder
         for (DcMotor m : RightMotors)
             m.setDirection(DcMotor.Direction.REVERSE);
 
-        // Now we set any properties that apply to all of the motors
+        //Now we set any properties that apply to all of the motors
         for (DcMotor m : AllMotors) {
             m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -191,28 +191,28 @@ public class Beholder
     //The targetAngleDifference should be positive if turning left, negative if turning right.
     public void Turn(double targetAngleDifference, double power) {
 
-        // Before starting the turn, take note of current angle as startAngle
+        //Before starting the turn, take note of current angle as startAngle
         double startAngle = GetCurrentZAngle();
 
-        // These are some boolean variables to tell if we've stepped motor power down.
+        //These are some boolean variables to tell if we've stepped motor power down.
         boolean firstStepDownComplete = false;
         boolean secondStepDownComplete = false;
 
-        // If our target angle is negative, we're turning right.
+        //If our target angle is negative, we're turning right.
         if (targetAngleDifference < 0) {
-            // We're turning right, so we want all right motors going backwards.
+            //We're turning right, so we want all right motors going backwards.
             for (DcMotor m : RightMotors)
                 m.setPower(-power);
             for (DcMotor m : LeftMotors)
                 m.setPower(power);
             OpModeReference.sleep(100);
 
-            // we're turning right, so our target angle difference will be negative (ex: -90)
-            // so GetAngleDifference will go from 0 to -90
-            // keep turning while difference is greater than target
+            //We're turning right, so our target angle difference will be negative (ex: -90).
+            //So GetAngleDifference will go from 0 to -90.
+            //We'll keep turning while difference is greater than target.
             while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
 
-                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                //This code is for stepping down motor power.
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : RightMotors)
                         m.setPower(-power / 4);
@@ -237,23 +237,21 @@ public class Beholder
                 OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
             }
-            // if targetAngleDifference is Positive, we're turning LEFT
+            //If our targetAngleDifference is Positive, we're turning left.
         } else if (targetAngleDifference > 0) {
-            // turning left so want all left motors going backwards
+            //Turning left, so we want all left motors going backwards.
             for (DcMotor m : RightMotors)
                 m.setPower(power);
             for (DcMotor m : LeftMotors)
                 m.setPower(-power);
-
-            // WARNING not sure if this sleep is needed - seemed necessary for right turns
             OpModeReference.sleep(100);
 
-            // we're turning right, so our target angle difference will be positive (ex: 90)
-            // so GetAngleDifference will go from 0 to 90
-            // keep turning while difference is less than target
+            //We're turning right, so our target angle difference will be positive (ex: 90).
+            //So GetAngleDifference will go from 0 to 90.
+            //Keep turning while difference is less than target.
             while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) < targetAngleDifference) {
 
-                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
+                //This code is for stepping down motor power.
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : RightMotors)
                         m.setPower(power / 4);
@@ -280,36 +278,29 @@ public class Beholder
 
             }
         } else {
-            // is zero - not turning - just return
+            //It's zero -- not turning -- just return.
             return;
 
         }
     }
 
-
+    //These next two methods are simply edited copies of the Turn method, changed to use one flank of wheels each.
+    //As such, the repetitive comments have been removed, and only relevant ones have been kept.
     public void TurnR(double targetAngleDifference, double power) {
 
-            // before starting the turn, take note of current angle as startAngle
             double startAngle = GetCurrentZAngle();
 
-            // These are just some boolean variables to tell if we've stepped motor power down.
-            // might actually want more than two steps
             boolean firstStepDownComplete = false;
             boolean secondStepDownComplete = false;
 
-            // If our target angle is negative, we're turning right.
-        if (targetAngleDifference < 0) {
-                // turning right, so we want all right motors going backwards
+            if (targetAngleDifference < 0) {
                 for (DcMotor m : RightMotors)
                     m.setPower(-power);
                 OpModeReference.sleep(100);
+                //You'll notice that only RightMotors are given power here, allowing us to turn just with the right motors.
 
-                // Now we're turning right, so our target angle difference will be negative (ex: -90).
-                // So now GetAngleDifference will go from 0 to -90.
-                // Now we keep turning while the difference is greater than target.
                 while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
 
-                    // This bit of code helps us step down our motor power when we turn so we don't overshoot our target.
                     if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                         for (DcMotor m : RightMotors)
                             m.setPower(-power/4);
@@ -319,6 +310,7 @@ public class Beholder
                             m.setPower(-power/2);
                         firstStepDownComplete = true;
                     }
+                    //Same with the motors down here.
 
                     OpModeReference.telemetry.addData("target", targetAngleDifference);
                     OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
@@ -330,21 +322,14 @@ public class Beholder
                     OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                     OpModeReference.telemetry.update();
                 }
-                // if targetAngleDifference is Positive, we're turning LEFT
             } else if (targetAngleDifference > 0) {
-                // turning left so want all left motors going backwards
                 for (DcMotor m : RightMotors)
                     m.setPower(power);
 
-                // WARNING not sure if this sleep is needed - seemed necessary for right turns
                 OpModeReference.sleep (100);
 
-                // we're turning right, so our target angle difference will be positive (ex: 90)
-                // so GetAngleDifference will go from 0 to 90
-                // keep turning while difference is less than target
                 while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) < targetAngleDifference) {
 
-                    // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
                     if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                         for (DcMotor m : RightMotors)
                             m.setPower(power/4);
@@ -367,39 +352,27 @@ public class Beholder
 
                 }
             } else {
-                // is zero - not turning - just return
                 return;
             }
 
-        // Turn all motors off
-        StopDriving();
-    }
+            StopDriving();
+        }
 
-    public void TurnL(double targetAngleDifference, double power) {
+        public void TurnL(double targetAngleDifference, double power) {
 
-        // before starting the turn, take note of current angle as startAngle
         double startAngle = GetCurrentZAngle();
 
-        // just some boolean variables to tell if we've stepped motor power down
-        // might actually want more than two steps
         boolean firstStepDownComplete = false;
         boolean secondStepDownComplete = false;
 
-        // if target angle is Negative, we're turning RIGHT
         if (targetAngleDifference < 0) {
-            // turning right, so we want all right motors going backwards
             for (DcMotor m : LeftMotors)
                 m.setPower(power);
-            // sleep a tenth of a second
-            // WARNING - not sure why this is needed - but sometimes right turns didn't work without
+            //Here we only have the LeftMotors, not the RightMotors.
             OpModeReference.sleep(100);
 
-            // we're turning right, so our target angle difference will be negative (ex: -90)
-            // so GetAngleDifference will go from 0 to -90
-            // keep turning while difference is greater than target
             while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) > targetAngleDifference) {
 
-                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : LeftMotors)
                         m.setPower(power/4);
@@ -409,6 +382,7 @@ public class Beholder
                         m.setPower(power/2);
                     firstStepDownComplete = true;
                 }
+                //Same with the motors here.
 
                 OpModeReference.telemetry.addData("target", targetAngleDifference);
                 OpModeReference.telemetry.addData("current", GetAngleDifference(startAngle));
@@ -420,21 +394,14 @@ public class Beholder
                 OpModeReference.telemetry.addData("BLC", BL.getCurrentPosition());
                 OpModeReference.telemetry.update();
             }
-            // if targetAngleDifference is Positive, we're turning LEFT
+
         } else if (targetAngleDifference > 0) {
-            // turning left so want all left motors going backwards
             for (DcMotor m : LeftMotors)
                 m.setPower(-power);
-
-            // WARNING not sure if this sleep is needed - seemed necessary for right turns
             OpModeReference.sleep (100);
 
-            // we're turning right, so our target angle difference will be positive (ex: 90)
-            // so GetAngleDifference will go from 0 to 90
-            // keep turning while difference is less than target
             while (OpModeReference.opModeIsActive() && GetAngleDifference(startAngle) < targetAngleDifference) {
 
-                // THIS CODE IS FOR STEPPING DOWN MOTOR POWER
                 if (!secondStepDownComplete && GetAngleDifference(startAngle) / targetAngleDifference > 0.75) {
                     for (DcMotor m : LeftMotors)
                         m.setPower(-power/4);
@@ -457,11 +424,10 @@ public class Beholder
 
             }
         } else {
-            // is zero - not turning - just return
+
             return;
         }
 
-        // Turn all motors off
         StopDriving();
     }
 }
