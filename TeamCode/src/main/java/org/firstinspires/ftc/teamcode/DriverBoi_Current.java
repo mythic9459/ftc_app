@@ -19,7 +19,8 @@ public class DriverBoi_Current extends LinearOpMode{
     private DcMotor BL = null;
     private DcMotor MR = null;
     private DcMotor ML = null;
-    private CRServo Intake = null;
+    private CRServo Intake1 = null;
+    private CRServo Intake2 = null;
     private DcMotor IH = null;
     //Here we start setting up our motors.
 
@@ -35,7 +36,8 @@ public class DriverBoi_Current extends LinearOpMode{
         FL = hardwareMap.get(DcMotor.class, "FL");
         BL = hardwareMap.get(DcMotor.class, "BL");
         ML = hardwareMap.get(DcMotor.class, "ML");
-        Intake = hardwareMap.get(CRServo.class, "Intake");
+        Intake1 = hardwareMap.get(CRServo.class, "Intake1");
+        Intake2 = hardwareMap.get(CRServo.class, "Intake2");
         IH = hardwareMap.get(DcMotor.class, "IH");
         //Here we finish setting up all our motors.
 
@@ -132,7 +134,8 @@ public class DriverBoi_Current extends LinearOpMode{
             BL.setPower(Lpower);
             ML.setPower(Lpower);
             //Here we set the power to our drive motors.
-            Intake.setPower(Ipower);
+            Intake1.setPower(Ipower);
+            Intake2.setPower(-Ipower);
             //Here we set the power to our intake servo motors.
             IH.setPower(IHpower);
             //Here we set the power to our intake's hinge.
