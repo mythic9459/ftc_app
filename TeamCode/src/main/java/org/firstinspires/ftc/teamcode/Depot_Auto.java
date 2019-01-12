@@ -38,9 +38,9 @@ public class Depot_Auto extends LinearOpMode {
         sleep(100);
 
         //Now we drop off our game piece.
-        robot.Intake1.setPower(1);
-        robot.Intake2.setPower(-1);
-        sleep(1000);
+        robot.Intake1.setPower(-1);
+        robot.Intake2.setPower(1);
+        sleep(3000);
         robot.Intake1.setPower(0);
         robot.Intake2.setPower(0);
 

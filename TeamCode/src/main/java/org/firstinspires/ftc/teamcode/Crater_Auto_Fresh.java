@@ -44,7 +44,7 @@ public class Crater_Auto_Fresh extends LinearOpMode {
         sleep(100);
 
         //Now we drive towards our alliance's wall and stop short.
-        robot.Drive(DRIVE_SPEED, 48);
+        robot.Drive(DRIVE_SPEED, 50);
         sleep(100);
 
         //Now we turn to face the alliance depot.
@@ -56,8 +56,8 @@ public class Crater_Auto_Fresh extends LinearOpMode {
         sleep(100);
 
         //Now we drop off our game piece.
-        robot.Intake1.setPower(1);
-        robot.Intake2.setPower(-1);
+        robot.Intake1.setPower(-1);
+        robot.Intake2.setPower(1);
         sleep(3000);
         robot.Intake1.setPower(0);
         robot.Intake2.setPower(0);
