@@ -136,6 +136,8 @@ public class DriverBoi_Current extends LinearOpMode{
                 Liftpower = 1;
             } else if (gamepad2.left_trigger > 0.5) {
                 Liftpower = -1;
+            } else{
+                Liftpower = 0;
             }
 
             FR.setPower(Rpower);
