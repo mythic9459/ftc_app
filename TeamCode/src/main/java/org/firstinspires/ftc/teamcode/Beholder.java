@@ -287,6 +287,7 @@ public class Beholder{
         }
     }
 
+
     //These next two methods are simply edited copies of the Turn method, changed to use one flank of wheels each.
     //As such, the repetitive comments have been removed, and only relevant ones have been kept.
     public void TurnR(double targetAngleDifference, double power) {

@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 /**
  * This is an OpMode that uses a hardware robot class
  */
+@Disabled
 @Autonomous(name = "Crater Auto Alpha", group = "IMU1")
 public class Crater_Auto_Alpha extends LinearOpMode {
 
@@ -45,7 +46,7 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         sleep(100);
 
         //Now we drive towards our alliance's wall and stop short.
-        robot.Drive(DRIVE_SPEED, 46);
+        robot.Drive(DRIVE_SPEED, 40);
         sleep(100);
 
         //Now we turn to face the alliance depot.
@@ -59,7 +60,7 @@ public class Crater_Auto_Alpha extends LinearOpMode {
         //Now we drop off our game piece.
 
         //Now we drive backwards across the field and into the crater.
-        robot.Drive(DRIVE_SPEED, -95);
+        robot.Drive(DRIVE_SPEED, -90);
 
         //Now we manually stop, just in case.
         robot.StopDriving();
