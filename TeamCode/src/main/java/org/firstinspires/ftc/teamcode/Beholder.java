@@ -18,8 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  *    - Does all initialization code
  *    - Has all of the methods for driving and turning
  */
-public class Beholder
-{
+public class Beholder {
     //Here we start setting up our motors, servos, and our imu device.
     BNO055IMU imu;
     public DcMotor FL = null;
@@ -30,6 +29,7 @@ public class Beholder
     public DcMotor BR = null;
     public CRServo Intake = null;
     public DcMotor IH = null;
+    public DcMotor Lift = null;
 
 
     //Now we're making arrays for our motors, allowing us to easily reference our right motors and our left motors.
@@ -74,6 +74,7 @@ public class Beholder
         BR = OpModeReference.hardwareMap.get(DcMotor.class, "BR");
         Intake = OpModeReference.hardwareMap.get(CRServo.class, "Intake");
         IH = OpModeReference.hardwareMap.get(DcMotor.class, "IH");
+        Lift = OpModeReference.hardwareMap.get(DcMotor.class, "Lift");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
 
         //Now we initialize the IMU.
@@ -94,6 +95,8 @@ public class Beholder
         AllMotors[3] = MR;
         AllMotors[4] = BL;
         AllMotors[5] = BR;
+
+        Lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Now set the direction for all left, then all right motors
         for (DcMotor m : LeftMotors)

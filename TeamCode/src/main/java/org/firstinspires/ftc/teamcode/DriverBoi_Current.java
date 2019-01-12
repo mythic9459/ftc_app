@@ -22,6 +22,7 @@ public class DriverBoi_Current extends LinearOpMode{
     private CRServo Intake1 = null;
     private CRServo Intake2 = null;
     private DcMotor IH = null;
+    private DcMotor Lift = null;
     //Here we start setting up our motors.
 
     @Override
@@ -39,6 +40,7 @@ public class DriverBoi_Current extends LinearOpMode{
         Intake1 = hardwareMap.get(CRServo.class, "Intake1");
         Intake2 = hardwareMap.get(CRServo.class, "Intake2");
         IH = hardwareMap.get(DcMotor.class, "IH");
+        Lift = hardwareMap.get(DcMotor.class, "Lift");
         //Here we finish setting up all our motors.
 
         FR.setDirection(DcMotor.Direction.REVERSE);
@@ -56,16 +58,19 @@ public class DriverBoi_Current extends LinearOpMode{
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         IH.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //Here we tell all motors to brake when they're not recieving commands.
+        Lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //Here we tell all motors to brake when they're not receiving commands.
 
         double IHpower;
         double Lpower;
         double Rpower;
         double Ipower;
+        double Liftpower;
         IHpower = 0;
         Lpower = 0;
         Rpower = 0;
         Ipower = 0;
+        Liftpower  = 0;
         //Here we set up our variables to let us set the motor power.
 
         boolean TurboSpeed;
@@ -127,6 +132,12 @@ public class DriverBoi_Current extends LinearOpMode{
             }
             //These bits allow us to drive straight forwards & backward.
 
+            if (gamepad2.right_trigger > 0.5) {
+                Liftpower = 1;
+            } else if (gamepad2.left_trigger > 0.5) {
+                Liftpower = -1;
+            }
+
             FR.setPower(Rpower);
             BR.setPower(Rpower);
             MR.setPower(Rpower);
@@ -138,10 +149,11 @@ public class DriverBoi_Current extends LinearOpMode{
             Intake2.setPower(-Ipower);
             //Here we set the power to our intake servo motors.
             IH.setPower(IHpower);
+            Lift.setPower(Liftpower);
             //Here we set the power to our intake's hinge.
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "Left (%.2f), Right (%.2f), Hinge (%.2f", Lpower, Rpower, IHpower);
+            telemetry.addData("Motors", "Left (%.2f), Right (%.2f), Hinge (%.2f), Lift (%.2f)", Lpower, Rpower, IHpower, Liftpower);
             telemetry.update();
             //Here we use some simple telemetry to display the running time and motor power levels.
         }
