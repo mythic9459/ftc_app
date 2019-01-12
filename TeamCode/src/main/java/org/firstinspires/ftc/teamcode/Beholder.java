@@ -14,11 +14,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 /**
  * This is NOT an opmode.
  * This is a class that:
- *    - Contains all of your robot hardware
+ *    - Contains all of our robot hardware
  *    - Does all initialization code
  *    - Has all of the methods for driving and turning
- *
- *    - This example is for the robot named Suspect, built by Astrid and Ari in 45 min
  */
 public class Beholder
 {
