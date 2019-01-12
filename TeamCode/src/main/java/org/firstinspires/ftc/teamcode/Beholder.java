@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  *    - Does all initialization code
  *    - Has all of the methods for driving and turning
  */
-public class Beholder {
+public class Beholder{
     //Here we start setting up our motors, servos, and our imu device.
     BNO055IMU imu;
     public DcMotor FL = null;
