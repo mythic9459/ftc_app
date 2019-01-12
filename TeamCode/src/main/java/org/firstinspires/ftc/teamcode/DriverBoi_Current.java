@@ -110,16 +110,17 @@ public class DriverBoi_Current extends LinearOpMode{
             //The first one allows us to use our the full speed of our motors.
 
             //The following section of code is designed to slow the hinge on our intake on its descent, preventing it from slamming into the ground
-            if (-gamepad2.right_stick_y > 0) {
-                IHpower = -gamepad2.left_stick_y * 0.5;
+            if (-gamepad2.left_stick_y > 0) {
+                IHpower = -gamepad2.left_stick_y * .75;
             }
             //This is for the ascent, in which we keep the power at its normal level
-            else if (-gamepad2.right_stick_y < 0) {
-                IHpower = -gamepad2.left_stick_y * 0.2;
+            else if (-gamepad2.left_stick_y < 0) {
+                IHpower = -gamepad2.left_stick_y * 0.5;
             }
             //This is for the descent, so we decrease our variable, thus decreasing the motor's power.
             else {
                 IHpower = -gamepad2.left_stick_y * 0.5;
+
             }
             //The code got angry without this last bit, as it didn't account for -gamepad2.right_stick_y = 0.
 
