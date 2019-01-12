@@ -36,9 +36,11 @@ public class Depot_Auto extends LinearOpMode {
         sleep(100);
 
         //Now we drop off our game piece.
-        robot.Intake.setPower(.5);
-        sleep(100);
-        robot.Intake.setPower(0);
+        robot.Intake1.setPower(1);
+        robot.Intake2.setPower(-1);
+        sleep(1000);
+        robot.Intake1.setPower(0);
+        robot.Intake2.setPower(0);
 
         //Now we turn to face the back of our robot to the crater.
         robot.Turn(43, DRIVE_SPEED);

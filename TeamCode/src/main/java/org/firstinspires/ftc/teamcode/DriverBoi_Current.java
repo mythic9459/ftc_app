@@ -83,25 +83,14 @@ public class DriverBoi_Current extends LinearOpMode{
 
         while (opModeIsActive()) {
 
-            if (gamepad1.right_bumper && TurboSpeed) {
-                TurboSpeed = false;
-            }
-            if (gamepad1.right_bumper && !TurboSpeed) {
-                TurboSpeed = true;
-            }
             //This allows us to press a button and toggle TurboSpeed.
 
-            if (TurboSpeed) {
-                Lpower = -gamepad1.left_stick_y * 0.5;
-                Rpower = -gamepad1.right_stick_y * 0.5;
-                Ipower = gamepad2.right_stick_y;
-            }
-            else if (!TurboSpeed) {
+            if (gamepad1.right_bumper) {
                 Lpower = -gamepad1.left_stick_y;
                 Rpower = -gamepad1.right_stick_y;
                 Ipower = gamepad2.right_stick_y;
             }
-            else{
+            else {
                 Lpower = -gamepad1.left_stick_y * 0.5;
                 Rpower = -gamepad1.right_stick_y * 0.5;
                 Ipower = gamepad2.right_stick_y;

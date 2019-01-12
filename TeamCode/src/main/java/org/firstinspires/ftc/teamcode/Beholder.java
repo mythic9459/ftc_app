@@ -27,7 +27,8 @@ public class Beholder{
     public DcMotor MR = null;
     public DcMotor BL = null;
     public DcMotor BR = null;
-    public CRServo Intake = null;
+    public CRServo Intake1 = null;
+    public CRServo Intake2 = null;
     public DcMotor IH = null;
     public DcMotor Lift = null;
 
@@ -72,7 +73,8 @@ public class Beholder{
         MR = OpModeReference.hardwareMap.get(DcMotor.class, "MR");
         BL = OpModeReference.hardwareMap.get(DcMotor.class, "BL");
         BR = OpModeReference.hardwareMap.get(DcMotor.class, "BR");
-        Intake = OpModeReference.hardwareMap.get(CRServo.class, "Intake");
+        Intake1 = OpModeReference.hardwareMap.get(CRServo.class, "Intake1");
+        Intake2 = OpModeReference.hardwareMap.get(CRServo.class, "Intake2");
         IH = OpModeReference.hardwareMap.get(DcMotor.class, "IH");
         Lift = OpModeReference.hardwareMap.get(DcMotor.class, "Lift");
         imu = OpModeReference.hardwareMap.get(BNO055IMU.class, "imu");
